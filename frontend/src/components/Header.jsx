@@ -1,97 +1,109 @@
 // src/components/Header.jsx
-import React from 'react';
-// Note: In a real project, you would import SVG icons (like Cart, Profile, etc.) here.
+import React from "react";
 
 const Header = () => {
   return (
-    // The main header container, spanning the full width
-    <header className="w-full h-[86px] border-b">
+    <header className="w-full border-b bg-white">
+      
+      {/* MAIN HEADER WRAPPER */}
+      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+        
+        {/* ------------------------- */}
+        {/* LOGO (Responsive) */}
+        {/* ------------------------- */}
+       
+       <div className="flex items-center gap-3 shrink-0">
+    
+    {/* Hamburger Menu - Only shows on mobile/tablet (<1024px) */}
+    <img 
+      src="/menu.png" 
+      alt="menu" 
+      className="w-6 h-6 lg:hidden cursor-pointer" 
+    />
 
+    {/* Logo Container */}
+    <div className="flex items-center ml-8">
+      <img
+        src="/assets/Layout/Brand/logo-colored.png"
+        alt="Logo"
+        className="w-[116px] md:w-[150px] h-auto object-contain" 
+      />
+    </div>
 
+  </div>
 
+        {/* ------------------------- */}
+        {/* SEARCH BAR */}
+        {/* On mobile: full width under logo */}
+        {/* ------------------------- */}
+        <div className="h-10 hidden lg:flex items-center border border-blue-600 rounded-lg overflow-hidden w-[665px] shrink-0">
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-[421px] p-2 text-sm focus:outline-none"
+          />
 
-      {/* 2. MAIN BAR: Logo, Search Bar, & User Icons */}
-      <div className="bg-white">
-
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-
-          {/* NEW CODE */}
-          {/* Logo/Branding: Set to 150px width and 46px height */}
-          {/* w-[150px] and h-[46px] are JIT classes to match the Figma spec precisely */}
-          <div className="mr-8 flex-shrink-0">
-            <img
-              src="/assets/Layout/Brand/logo-colored.png" // !!! CHANGE THIS TO YOUR ACTUAL LOGO FILE PATH !!!
-              alt="eCom Brand Logo"
-              className="w-[150px] h-[46px]" // Applying the exact Figma dimensions
-            />
+          <div className=" w-[145px] border-l-2 border-blue-600 px-2 border-r  text-black text-sm flex items-center cursor-pointer">
+            All category <span className="ml-1 text-xs">▼</span>
           </div>
 
-          {/* Search Bar (Prominent in design, hidden on small mobile) */}
-          {/* Search Bar (Accurate to Figma: Input | Category | Search Button) */}
-          {/* w-[421px] sets the precise width, and the inner py-2 achieves the 40px height. */}
-          <div className="flex-shrink-0 flex items-center border border-blue-600 rounded-lg overflow-hidden w-[421px]">
-
-            {/* 1. Search Input */}
-            {/* Input Field goes here */}
-            <input
-              type="text"
-              placeholder="Search"
-              name="search_query"
-              // p-2 padding helps achieve the 40px height
-              className="w-full p-2 text-base focus:outline-none flex-grow"
-            />
-
-            {/* 2. Category Dropdown: The Separator element */}
-            {/* It has a border and is aligned vertically in the center */}
-            <div className="border-l border-r border-gray-300 px-3 py-2 text-gray-500 flex items-center flex-shrink-0 cursor-pointer">
-              All category <span className='ml-1 text-xs'>▼</span>
-            </div>
-
-            {/* 3. Search Button */}
-            <button className="bg-blue-600 text-white px-6 py-2 font-semibold hover:bg-opacity-90 transition-colors flex-shrink-0 h-full">
-              Search
-            </button>
-
-          </div>
-          {/* User Icons (Cart, Profile) */}
-          {/* 4. User Actions (4 Icon/Text pairs - Profile, Message, Orders, My cart) */}
-          {/* w-[228px] sets the required total width for the block. */}
-          <div className="flex items-center justify-between text-xs text-gray-700 flex-shrink-0 w-[228px]">
-
-            
-            {/* Profile */}
-<div className="text-center hover:text-primary  cursor-pointer w-1/4">
-  <img src="/Profile.png" alt="Profile" className="w-6 h-6 mx-auto mb-1" />
-  Profile
-</div>
-
-{/* Message */}
-<div className="text-center hover:text-primary cursor-pointer w-1/4">
-  <img src="/message.png" alt="Message" className="w-6 h-6 mx-auto mb-1" />
-  Message
-</div>
-
-{/* Orders */}
-<div className="text-center hover:text-primary cursor-pointer w-1/4">
-  <img src="/Order.png" alt="Orders" className="w-6 h-6 mx-auto mb-1" />
-  Orders
-</div>
-
-
-
-{/* Cart */}
-<div className="text-center hover:text-primary cursor-pointer w-1/4">
-  <img src="/Cart.png" alt="Cart" className="w-6 h-6 mx-auto mb-1" />
-  My cart
-</div>
-
-          </div>
+          <button className= "w-[100px] bg-blue-600 py-2 h-full  text-white  px-6 font-semibold hover:bg-opacity-90">
+            Search
+          </button>
         </div>
+
+        {/* ------------------------- */}
+        {/* USER ICONS (Responsive) */}
+        {/* Hidden on small screens */}
+        {/* ------------------------- */}
+        {/* 1. Main Container: Removed 'hidden' so it shows on mobile. Added 'gap-5' for the spacing. */}
+<div className="flex items-center justify-end text-xs text-gray-700 w-auto mr-8 md:w-[228px] shrink-0 gap-5">
+
+  {/* PROFILE: Always visible */}
+  <div className="text-center hover:text-primary cursor-pointer mx-auto">
+    <img src="/Profile.png" className="w-6 h-6 mx-auto mb-1" alt="Profile" />
+    <span className="hidden md:block">Profile</span> {/* Text hidden on mobile to save space */}
+  </div>
+
+  {/* MESSAGE: Hidden on mobile, shown on medium screens (md) */}
+  <div className="hidden md:block text-center hover:text-primary cursor-pointer">
+    <img src="/message.png" className="w-6 h-6 mx-auto mb-1" alt="Message" />
+    Message
+  </div>
+
+  {/* ORDERS: Hidden on mobile, shown on medium screens (md) */}
+  <div className="hidden md:block text-center hover:text-primary cursor-pointer">
+    <img src="/Order.png" className="w-6 h-6 mx-auto mb-1" alt="Orders" />
+    Orders
+  </div>
+
+  {/* CART: Always visible */}
+  <div className="text-center hover:text-primary cursor-pointer">
+    <img src="/Cart.png" className="w-6 h-6 mx-auto mb-1" alt="Cart" />
+    <span className="hidden md:block">My cart</span> {/* Text hidden on mobile like the image */}
+  </div>
+  
+</div>
+
+       
+        
+
       </div>
 
+      {/* MOBILE SEARCH BAR (Below Header) */}
+      <div className="px-4 pb-3 lg:hidden">
+        <div className="flex items-center border border-blue-600 rounded-lg overflow-hidden w-full">
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full p-2 text-sm focus:outline-none"
+          />
 
-      
-
+          <button className="bg-blue-600 text-white px-4 py-2">
+            Search
+          </button>
+        </div>
+      </div>
 
     </header>
   );

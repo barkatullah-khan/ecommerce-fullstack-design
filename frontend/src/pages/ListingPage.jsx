@@ -19,7 +19,7 @@ const ListingPage = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* 1. Filter Sidebar (The `aside` element) */}
-          <aside className="lg:w-1/4 flex-shrink-0">
+          <aside className="lg:w-1/4 shrink-0">
             
             {/* Mobile Filter Button (VISIBLE only on small screens) */}
             <div className="lg:hidden mb-4">
@@ -50,7 +50,7 @@ const ListingPage = () => {
           </aside>
 
           {/* 2. Product Results (The `section` element) */}
-          <section className="flex-grow lg:w-3/4">
+          <section className="grow lg:w-3/4">
             
             {/* Grid Container: Responsive column count */}
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">

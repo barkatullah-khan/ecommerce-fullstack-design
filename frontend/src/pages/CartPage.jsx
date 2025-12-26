@@ -20,7 +20,7 @@ const CartPage = () => {
       
       {/* 1. Image & Name */}
       <div className="flex items-center w-full sm:w-2/5 mb-3 sm:mb-0">
-        <div className={`w-20 h-20 ${item.image} rounded mr-4 flex-shrink-0`}></div>
+        <div className={`w-20 h-20 ${item.image} rounded mr-4 shrink-0`}></div>
         <span className="font-semibold text-secondary">{item.name}</span>
       </div>
 

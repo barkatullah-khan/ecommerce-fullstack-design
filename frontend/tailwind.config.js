@@ -7,9 +7,11 @@ export default {
   ],
   theme: {
     extend: {
-      screens: {
-        'lgx': '1000px',  // custom breakpoint
-      },
+       colors: {
+        "background-light": "#F5F5F5",   // soft light grey
+        "primary": "#3B82F6",            // optional
+        "secondary": "#1F2937",          // optional
+      }
     },
   },
   plugins: [],

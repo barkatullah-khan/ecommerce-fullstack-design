@@ -24,9 +24,9 @@ const DetailsPage = () => {
             
             {/* Thumbnail Gallery */}
             <div className="flex space-x-2 overflow-x-auto">
-              <div className="w-20 h-20 bg-gray-300 border-2 border-primary cursor-pointer flex-shrink-0 rounded"></div>
-              <div className="w-20 h-20 bg-gray-300 flex-shrink-0 rounded"></div>
-              <div className="w-20 h-20 bg-gray-300 flex-shrink-0 rounded"></div>
+              <div className="w-20 h-20 bg-gray-300 border-2 border-primary cursor-pointer shrink-0 rounded"></div>
+              <div className="w-20 h-20 bg-gray-300 shrink-0 rounded"></div>
+              <div className="w-20 h-20 bg-gray-300 shrink-0 rounded"></div>
               {/* ... more thumbnails */}
             </div>
           </section>
