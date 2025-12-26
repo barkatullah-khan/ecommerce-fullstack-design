@@ -467,7 +467,7 @@ const HomePage = () => {
     ].map((service, index) => (
       <div 
         key={index} 
-        className="relative bg-white border border-[#E0E7E9] rounded-lg overflow-hidden h-[200px] md:h-[256px] group"
+        className="relative bg-white border border-[#E0E7E9] rounded-lg overflow-hidden h-[200px] md:h-64 group"
       >
         {/* Darkened Image Section */}
         <div className="relative h-[60%] w-full overflow-hidden bg-gray-800">
