@@ -2,30 +2,49 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
-import DetailsPage from "./pages/DetailsPage"; // You must import this
+import DetailsPage from "./pages/DetailsPage"; 
 
 function App() {
-  // This state will hold all items added to the cart
   const [cart, setCart] = useState([]);
 
-  // Function to add a product to the cart
+  // 1. ADDED BACK: Function to update quantity (+/-)
+  const updateQuantity = (id, delta) => {
+    setCart(prevCart =>
+      prevCart.map(item =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, (item.quantity || 1) + delta) }
+          : item
+      )
+    );
+  };
+
+  // 2. Updated addToCart logic
   const addToCart = (product) => {
-    // We use a spread operator to keep old items and add the new one
-    setCart([...cart, product]);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id 
+            ? { ...item, quantity: (item.quantity || 1) + 1 } 
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
     alert(`${product.title} added to cart!`);
   };
 
   return (
     <Router>
       <Routes>
-        {/* The Home Page needs the addToCart function */}
         <Route path="/" element={<HomePage onAddToCart={addToCart} cart={cart}/>} />
-        
-        {/* The Details Page needs the addToCart function too */}
         <Route path="/product/:id" element={<DetailsPage onAddToCart={addToCart} cart={cart} />} />
         
-        {/* The Cart Page needs the actual list (cart) and the ability to update it (setCart) */}
-        <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
+        {/* Now updateQuantity is defined and can be passed safely */}
+        <Route 
+          path="/cart" 
+          element={<CartPage cart={cart} setCart={setCart} updateQuantity={updateQuantity} />} 
+        />
       </Routes>
     </Router>
   );

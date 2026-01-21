@@ -4,10 +4,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 
-const CartPage = ({ cart, setCart }) => {
+// Added updateQuantity to the props destructuring
+const CartPage = ({ cart, setCart, updateQuantity }) => {
   
-  // 1. Calculate subtotal based on REAL cart data
-  const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+  // 1. Updated subtotal to multiply price by quantity
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   // 2. Function to remove item
   const removeFromCart = (id) => {
@@ -28,31 +29,48 @@ const CartPage = ({ cart, setCart }) => {
         <div className="flex flex-col min-w-0">
           <span className="font-semibold text-secondary text-sm sm:text-base truncate">
             {item.title}
-      </span>
-        <button 
-          onClick={() => removeFromCart(item.id)}
+          </span>
+          <button 
+            onClick={() => removeFromCart(item.id)}
             className="text-[11px] sm:text-xs text-left text-red-500 hover:text-red-700 mt-1 font-medium"
-        >
-          Remove
-        </button>
+          >
+            Remove
+          </button>
+        </div>
       </div>
-    </div>
 
-      {/* RIGHT: Price and Quantity */}
+      {/* RIGHT: Price and Quantity Controls */}
       <div className="flex flex-col items-end shrink-0 ml-2">
         <span className="text-sm sm:text-lg font-bold text-primary">
-          ${item.price.toFixed(2)}
+          ${(item.price * item.quantity).toFixed(2)}
         </span>
-        <span className="text-[10px] sm:text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded border mt-1">
-          Qty: 1
-        </span>
+        
+        {/* Updated Quantity Control UI */}
+        <div className="flex items-center border rounded-lg overflow-hidden mt-1 bg-white shadow-sm">
+          <button 
+            onClick={() => updateQuantity(item.id, -1)}
+            className="px-2 sm:px-3 py-0.5 bg-gray-100 hover:bg-gray-200 text-secondary font-bold border-r transition-colors"
+          >
+            −
+          </button>
+          
+          <span className="px-3 sm:px-4 py-0.5 text-xs sm:text-sm font-semibold text-secondary">
+            {item.quantity}
+          </span>
+          
+          <button 
+            onClick={() => updateQuantity(item.id, 1)}
+            className="px-2 sm:px-3 py-0.5 bg-gray-100 hover:bg-gray-200 text-secondary font-bold border-l transition-colors"
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Passing cart to Header so the badge works */}
       <Header cart={cart} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -99,19 +117,19 @@ const CartPage = ({ cart, setCart }) => {
                 <h2 className="text-xl font-bold border-b pb-3 mb-4 text-secondary">Order Summary</h2>
                 <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
-                  <span>Subtotal:</span>
+                    <span>Subtotal:</span>
                     <span className="font-semibold text-secondary">${subtotal.toFixed(2)}</span>
-                </div>
+                  </div>
                   <div className="flex justify-between text-gray-600">
-                  <span>Shipping:</span>
+                    <span>Shipping:</span>
                     <span className="font-semibold text-green-600">Free</span>
                   </div>
                   <div className="flex justify-between text-gray-600 border-b pb-3">
                     <span>Tax (GST):</span>
                     <span className="font-semibold text-secondary">$0.00</span>
-                </div>
-                <div className="flex justify-between pt-3 text-xl font-bold text-secondary">
-                  <span>Order Total:</span>
+                  </div>
+                  <div className="flex justify-between pt-3 text-xl font-bold text-secondary">
+                    <span>Order Total:</span>
                     <span className="text-blue-700">${subtotal.toFixed(2)}</span>
                   </div>
                 </div>
