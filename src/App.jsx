@@ -5,6 +5,9 @@ import CartPage from "./pages/CartPage";
 import DetailsPage from "./pages/DetailsPage";
 
 function App() {
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
   // 1. Initialize cart from LocalStorage if it exists, otherwise use empty array
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("shopping-cart");
@@ -54,7 +57,9 @@ function App() {
               onAddToCart={addToCart}
               cart={cart}
               searchQuery={searchQuery}
-              setsearchQuery={setsearchQuery} // Add this line!
+              setsearchQuery={setsearchQuery} 
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}// Add this line!
             />
           }
         />

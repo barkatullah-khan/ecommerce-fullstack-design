@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Note: Changed prop name to setsearchQuery (lowercase 's') to match your App.jsx
-const Header = ({ cart = [], setsearchQuery }) => {
+const Header = ({ cart = [], setsearchQuery,searchQuery }) => {
   return (
     <header className="w-full border-b border-gray-300 bg-white">
 
@@ -33,6 +33,7 @@ const Header = ({ cart = [], setsearchQuery }) => {
             type="text"
             placeholder="Search..."
             // CONNECTED SEARCH HERE
+            value={searchQuery}
             onChange={(e) => setsearchQuery(e.target.value)}
             className="grow px-4 text-sm focus:outline-none text-gray-600"
           />
